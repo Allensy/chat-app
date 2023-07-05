@@ -10,8 +10,8 @@ interface ChatProps {
 function Chat({ messages = [] }: ChatProps) {
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
-    if (messagesEndRef.current !== null) {
-      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+      if (messagesEndRef.current !== null && messagesEndRef.current.scrollIntoView) {
+      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }
   }, [messages]);
 
