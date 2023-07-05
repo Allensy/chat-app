@@ -1,0 +1,31 @@
+.FeedbackControl {
+    display: flex;
+
+    .feedback-message {
+        margin: auto;
+        font-family: Lato;
+        font-size: 14px;
+        color: #7a7a7a;
+    }
+
+    .feedback-button {
+        margin: 0 4px;
+        padding: 8px;
+        border-radius: 4px;
+        cursor: pointer;
+        transform: scale(1);
+        transition: .2s transform ease-in-out;
+
+        &.up {
+            // background-color: #B5C99A;
+        }
+
+        &.down {
+            // background-color: #862B0D;
+        }
+
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+}

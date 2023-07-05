@@ -1,0 +1,74 @@
+.MessageRow {
+    display: flex;
+    margin: 8px 0;
+
+    .animation-frame {
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+
+        &.animate {
+            opacity: 1;
+        }
+
+        .message-item {
+            border-radius: 8px;
+            padding: 8px 12px;
+            text-align: left;
+            font-family: Lato;
+            font-size: 14px;
+            font-weight: 400;
+
+            .message {
+                .sender {
+                    font-weight: 700;
+                    font-size: 16px;
+                    text-transform: capitalize;
+                    margin: 4px 0;
+                }
+            }
+        }
+    }
+
+    &.user {
+        justify-content: start;
+
+        .message-item {
+            background-color: #f2f2f7;
+        }
+    }
+
+    &.bot {
+        justify-content: end;
+        flex-direction: row-reverse;
+
+        .message-item {
+            background-color: #ffda7d;
+        }
+
+        .feedback-wrapper {}
+    }
+
+    .feedback-wrapper {
+        margin: auto 12px;
+    }
+
+    .sender-msg {}
+
+    .bot-msg {}
+
+    .MessageItem {
+        border-radius: 8px;
+        display: inline-flex;
+        padding: 12px;
+
+        &.sender-msg {
+            background-color: red;
+            justify-content: flex-start;
+        }
+
+        &.bot-msg {
+            background-color: blue;
+            justify-content: flex-end;
+        }
+    }
+}
