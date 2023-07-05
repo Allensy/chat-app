@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import "./chat.scss";
 import MessageItem from "../Message/message";
 import { Message } from "../../types/Message.interface";
@@ -10,7 +10,10 @@ interface ChatProps {
 function Chat({ messages = [] }: ChatProps) {
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
-      if (messagesEndRef.current !== null && messagesEndRef.current.scrollIntoView) {
+    if (
+      messagesEndRef.current !== null &&
+      messagesEndRef.current.scrollIntoView
+    ) {
       messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }
   }, [messages]);
