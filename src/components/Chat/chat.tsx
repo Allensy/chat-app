@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from "react";
 import "./chat.scss";
 import MessageItem from "../Message/message";
-import { Message } from "../../types/Message.interface";
+import { Answer, Message } from "../../types/Message.interface";
 
 interface ChatProps {
-  messages?: Message[];
+  messages?: (Message | Answer)[];
 }
 
 function Chat({ messages = [] }: ChatProps) {
@@ -21,11 +21,7 @@ function Chat({ messages = [] }: ChatProps) {
   return (
     <div className="Chat">
       {messages.map((message, index) => (
-        <MessageItem
-          key={index}
-          sender={message.sender}
-          message={message.message}
-        ></MessageItem>
+        <MessageItem key={index} message={message}></MessageItem>
       ))}
       <div ref={messagesEndRef}></div>
     </div>

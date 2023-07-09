@@ -1,0 +1,20 @@
+.message-ai {
+    border-radius: 8px;
+    padding: 8px 12px;
+    text-align: left;
+    font-family: Lato;
+    font-size: 14px;
+    font-weight: 400;
+    background-color: #ffda7d;
+
+    .sender {
+        font-weight: 700;
+        font-size: 16px;
+        text-transform: capitalize;
+        margin: 4px 0;
+    }
+
+    &.error {
+        background-color: #ff7d7d;
+    }
+}
