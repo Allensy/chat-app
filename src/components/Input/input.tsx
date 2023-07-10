@@ -5,7 +5,7 @@ const ENTER_KEY = "Enter";
 
 interface InputProps {
   onChange?: (e: any) => void;
-  onEnter: (e: any) => void;
+  onEnter?: (e: any) => void;
   value?: string;
 }
 
@@ -18,7 +18,7 @@ function Input({ onChange, onEnter, value = "" }: InputProps) {
   };
   const handleKeyDown = (e: { key: string }) => {
     if (e.key === ENTER_KEY) {
-      onEnter(inputValue);
+      onEnter && onEnter(inputValue);
       setInputValue("");
     }
   };
