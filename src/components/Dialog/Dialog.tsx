@@ -45,7 +45,7 @@ const Dialog = ({ onSave }: DialogProps) => {
           {/* <input className="input-item" type="text" />
           <input className="input-item" type="text" />
           <input className="input-item" type="text" /> */}
-          <button role="submit">Save</button>
+          <button>Save</button>
         </form>
       </dialog>
     </div>
