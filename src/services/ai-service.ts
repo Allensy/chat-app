@@ -1,3 +1,4 @@
+import { UserData } from "./../types/Message.interface";
 import axios from "axios";
 import { Answer } from "../types/Message.interface";
 
@@ -28,6 +29,10 @@ const QUESTION_ENDPOINT = "/questions/";
 
 //   return response.data;
 // };
+
+export const initializeUser = (data: UserData) => {
+  localStorage.setItem("userData", JSON.stringify(data));
+};
 
 export const getQuestionsAndAnswers = async (
   question: string

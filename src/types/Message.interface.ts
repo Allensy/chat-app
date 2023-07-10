@@ -45,3 +45,9 @@ export enum AI_STATE {
   WAITING = "waiting",
   READY = "ready",
 }
+
+export interface UserData {
+  company_size: string;
+  industry: string;
+  country: string;
+}

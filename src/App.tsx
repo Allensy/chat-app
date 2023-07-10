@@ -1,16 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.scss";
 import Input from "./components/Input/input";
 import Chat from "./components/Chat/chat";
-import { Answer, Message, Sender } from "./types/Message.interface";
+import { Answer, Message, Sender, UserData } from "./types/Message.interface";
 import { AI_STATE } from "./types/Message.interface";
-import { getQuestionsAndAnswers } from "./services/ai-service";
+import { getQuestionsAndAnswers, initializeUser } from "./services/ai-service";
+import Dialog from "./components/Dialog/Dialog";
 
 function App() {
+  const [showModal, setShowModal] = React.useState<boolean>(false);
+  useEffect(() => {
+    // if (!localStorage.getItem("userData")) setShowModal(true);
+  }, []);
+
   const [messages, setMessages] = React.useState<(Message | Answer)[]>([]);
 
   const inputHandler = (value: string) => {
-    console.log(value);
     messages.push({ sender: Sender.USER, message: value });
     setMessages([...messages]);
     runQuery(value);
@@ -20,7 +25,6 @@ function App() {
     const loader: Answer = { sender: Sender.AI, answer: AI_STATE.WAITING };
     messages.push(loader);
     setMessages([...messages]);
-    // return index;
   };
 
   const runQuery = async (query: string) => {
@@ -43,9 +47,14 @@ function App() {
       }
     );
   };
-  console.log(messages);
+
+  const getUserData = (data: UserData) => {
+    setShowModal(false);
+    initializeUser(data);
+  };
   return (
     <div className="App">
+      {showModal && <Dialog onSave={getUserData} />}
       <div className="chat-section">
         <Chat messages={messages}></Chat>
       </div>

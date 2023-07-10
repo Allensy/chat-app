@@ -1,0 +1,26 @@
+.dialog-backdrop {
+    background-color: #585858;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    opacity: 0.6;
+
+    .chat-dialog {
+        transform: translate(-50%, -50%);
+        top: 50%;
+        left: 50%;
+        height: 60vh;
+        width: 60vw;
+
+        .userForm {
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+            margin: auto;
+            .input-item {
+                
+            }
+        }
+    }
+
+}
