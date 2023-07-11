@@ -1,7 +1,11 @@
 import { UserData } from "./../types/Message.interface";
 import axios from "axios";
 import { Answer } from "../types/Message.interface";
-import { BASE_URL, QUESTION_ENDPOINT } from "../constants/configs";
+import {
+  BASE_URL,
+  QUERY_ENDPOINT,
+  QUESTION_ENDPOINT,
+} from "../constants/configs";
 // require("dotenv").config();
 
 // interface Embedding {
@@ -26,6 +30,17 @@ import { BASE_URL, QUESTION_ENDPOINT } from "../constants/configs";
 //   return response.data;
 // };
 
+export interface VoteRequest {
+  questionId: string;
+  vote: VOTES;
+  vote_reason?: string;
+}
+
+export enum VOTES {
+  UP = 1,
+  DOWN = -1,
+}
+
 export const initializeUser = (data: UserData) => {
   localStorage.setItem("userData", JSON.stringify(data));
 };
@@ -36,5 +51,10 @@ export const getQuestionsAndAnswers = async (
   const response = await axios.get(
     `${BASE_URL}${QUESTION_ENDPOINT}${question}`
   );
+  return response.data;
+};
+
+export const voteResponse = async (vote: VoteRequest) => {
+  const response = await axios.put(`${BASE_URL}${QUERY_ENDPOINT}`, vote);
   return response.data;
 };

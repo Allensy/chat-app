@@ -42,7 +42,9 @@ function MessageItem({ message }: MessageItemProps) {
         <div className="feedback-wrapper">
           {isAnAnswer &&
             !message.error &&
-            message.answer !== AI_STATE.WAITING && <FeedbackControl />}
+            message.answer !== AI_STATE.WAITING && (
+              <FeedbackControl answer={message} />
+            )}
         </div>
       </div>
     </div>

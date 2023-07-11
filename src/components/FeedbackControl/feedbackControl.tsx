@@ -2,17 +2,33 @@ import React, { Fragment } from "react";
 import "./feedbackControl.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsDown, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
+import { VOTES, VoteRequest, voteResponse } from "../../services/ai-service";
+import { Answer } from "../../types/Message.interface";
 
-function FeedbackControl() {
+interface FeedbackControlProps {
+  answer: Answer;
+}
+
+function FeedbackControl({ answer }: FeedbackControlProps) {
   const [feedbackStatus, setFeedbackStatus] = React.useState<string>("");
 
-  const voteUp = () => {
-    console.log("Up");
-    setFeedbackStatus("Thanks for your feedback! you stupid ass");
+  const voteUp = async () => {
+    if (answer.id === undefined) return console.error("Answer id is undefined");
+    const voteData: VoteRequest = {
+      questionId: answer.id,
+      vote: VOTES.UP,
+    };
+    await voteResponse(voteData);
+    setFeedbackStatus("Thanks for your feedback!");
   };
-  const voteDown = () => {
-    console.log("Down");
-    setFeedbackStatus("Thanks for your feedback! you stupid ass");
+  const voteDown = async () => {
+    if (answer.id === undefined) return console.error("Answer id is undefined");
+    const voteData: VoteRequest = {
+      questionId: answer.id,
+      vote: VOTES.DOWN,
+    };
+    await voteResponse(voteData);
+    setFeedbackStatus("Thanks for your feedback!");
   };
   return (
     <div className="FeedbackControl">
@@ -23,7 +39,6 @@ function FeedbackControl() {
           <div className="feedback-message">Was that helpful?</div>
           <div className="feedback-button up" onClick={voteUp}>
             <FontAwesomeIcon icon={faThumbsUp} />
-            {/* <i className="fa-regular fa-thumbs-down"></i> */}
           </div>
           <div className="feedback-button down" onClick={voteDown}>
             <FontAwesomeIcon icon={faThumbsDown} />
