@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import {
-    AI_STATE,
-    Answer,
-    Message,
-    Sender
+  AI_STATE,
+  Answer,
+  Message,
+  Sender,
 } from "../../types/Message.interface";
 import FeedbackControl from "../FeedbackControl/feedbackControl";
 import AIMessage from "./AIMessage";

@@ -1,12 +1,8 @@
 import { UserData } from "./../types/Message.interface";
 import axios from "axios";
 import { Answer } from "../types/Message.interface";
-
-// const API_BASE_URL = "http://127.0.0.1:8000";
-const API_BASE_URL = "http://10.1.23.186:8000";
-
-// const QUERY_ENDPOINT = "/embedded/index-model";
-const QUESTION_ENDPOINT = "/questions/";
+import { BASE_URL, QUESTION_ENDPOINT } from "../constants/configs";
+// require("dotenv").config();
 
 // interface Embedding {
 //   question: string;
@@ -38,7 +34,7 @@ export const getQuestionsAndAnswers = async (
   question: string
 ): Promise<Answer[]> => {
   const response = await axios.get(
-    `${API_BASE_URL}${QUESTION_ENDPOINT}${question}`
+    `${BASE_URL}${QUESTION_ENDPOINT}${question}`
   );
   return response.data;
 };
