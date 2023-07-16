@@ -26,14 +26,14 @@ function MessageItem({ message }: MessageItemProps) {
 
   const isSenderAI = message.sender === Sender.AI || !message.sender;
   const isAMessage = "message" in message;
-  const isAnAnswer = "answer" in message;
+  const isAnAnswer = "response" in message;
 
   return (
     <div className={`MessageRow ${isSenderAI ? "bot" : "user"}`}>
       <div className={`animation-frame ${animationFrame}`}>
         {isSenderAI && isAnAnswer ? (
           <AIMessage
-            answer={message.answer}
+            response={message.response}
             isError={message.error}
           ></AIMessage>
         ) : isAMessage ? (
@@ -42,8 +42,8 @@ function MessageItem({ message }: MessageItemProps) {
         <div className="feedback-wrapper">
           {isAnAnswer &&
             !message.error &&
-            message.answer !== AI_STATE.WAITING && (
-              <FeedbackControl answer={message} />
+            message.response !== AI_STATE.WAITING && (
+              <FeedbackControl response={message} />
             )}
         </div>
       </div>

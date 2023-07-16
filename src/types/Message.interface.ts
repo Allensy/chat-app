@@ -7,12 +7,12 @@ export enum Sender {
 export interface Message {
   message: string;
   sender: Sender;
-  //   answer?: string;
+  //   response?: string;
 }
 
 export interface EmbeddingRequest {
   question: string;
-  answer: string;
+  response: string;
   isWin: boolean;
   companyName: string;
   companySize: string;
@@ -23,13 +23,13 @@ export interface EmbeddingRequest {
 
 export interface Question {
   question: string;
-  answer: string;
+  response: string;
   rate: number;
 }
 
 export interface Ai_Answer {
   sender: string;
-  answer: string;
+  response: string;
   error?: boolean;
 }
 

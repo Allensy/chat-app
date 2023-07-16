@@ -4,19 +4,19 @@ import { AI_STATE, Sender } from "../../types/Message.interface";
 import ThreeDotsLoader from "../Loader/three-dots";
 
 interface AIMessageProps {
-  answer: string;
+  response: string;
   isError?: boolean;
 }
 
-const AIMessage = ({ answer, isError }: AIMessageProps) => {
+const AIMessage = ({ response, isError }: AIMessageProps) => {
   return (
     <div className={`message-ai ${isError ? "error" : ""}`}>
-      {answer === AI_STATE.WAITING ? (
+      {response === AI_STATE.WAITING ? (
         <ThreeDotsLoader />
       ) : (
         <div className="message">
           <div className="sender">{Sender.AI}</div>
-          {answer}
+          {response}
         </div>
       )}
     </div>

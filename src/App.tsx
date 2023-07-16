@@ -33,7 +33,7 @@ function App() {
   };
 
   const startLoader = (): void => {
-    const loader: Answer = { sender: Sender.AI, answer: AI_STATE.WAITING };
+    const loader: Answer = { sender: Sender.AI, response: AI_STATE.WAITING };
     messages.push(loader);
     setMessages([...messages]);
   };
@@ -41,9 +41,9 @@ function App() {
   const runQuery = async (query: string) => {
     startLoader();
     getQuestionsAndAnswers(query).then(
-      (response: Answer[]) => {
+      (response: Answer) => {
         messages.pop();
-        setMessages([...messages, ...response]);
+        setMessages([...messages, response]);
       },
       (err) => {
         console.error(err);
@@ -51,7 +51,7 @@ function App() {
         const error: Answer = {
           sender: Sender.AI,
           error: true,
-          answer: "Oops! Sowwyyyyy!",
+          response: "Oops! Sowwyyyyy!",
         };
         messages.push(error);
         setMessages([...messages]);

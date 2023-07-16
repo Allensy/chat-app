@@ -1,4 +1,4 @@
-import { UserData } from "./../types/Message.interface";
+import { Sender, UserData } from "./../types/Message.interface";
 import axios from "axios";
 import { Answer } from "../types/Message.interface";
 import {
@@ -38,7 +38,7 @@ export const resetUserData = () => {
 
 export const getQuestionsAndAnswers = async (
   question: string
-): Promise<Answer[]> => {
+): Promise<Answer> => {
   let params = "";
   const userData: UserData | null = getUserData();
   if (userData) {
@@ -50,7 +50,16 @@ export const getQuestionsAndAnswers = async (
   const response = await axios.get(
     `${BASE_URL}${QUESTION_ENDPOINT}${question}${params}`
   );
-  return response.data;
+  let result: Answer = {
+    sender: Sender.AI,
+    response: "Sorry, I don't understand what you mean.",
+  };
+  try {
+    result = JSON.parse(response.data);
+  } catch (e) {
+    console.error(e);
+  }
+  return result;
 };
 
 export const voteResponse = async (vote: VoteRequest) => {

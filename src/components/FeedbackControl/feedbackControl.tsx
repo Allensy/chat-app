@@ -6,25 +6,27 @@ import { VOTES, VoteRequest, voteResponse } from "../../services/ai-service";
 import { Answer } from "../../types/Message.interface";
 
 interface FeedbackControlProps {
-  answer: Answer;
+  response: Answer;
 }
 
-function FeedbackControl({ answer }: FeedbackControlProps) {
+function FeedbackControl({ response }: FeedbackControlProps) {
   const [feedbackStatus, setFeedbackStatus] = React.useState<string>("");
 
   const voteUp = async () => {
-    if (answer.id === undefined) return console.error("Answer id is undefined");
+    if (response.id === undefined)
+      return console.error("Answer id is undefined");
     const voteData: VoteRequest = {
-      questionId: answer.id,
+      questionId: response.id,
       vote: VOTES.UP,
     };
     await voteResponse(voteData);
     setFeedbackStatus("Thanks for your feedback!");
   };
   const voteDown = async () => {
-    if (answer.id === undefined) return console.error("Answer id is undefined");
+    if (response.id === undefined)
+      return console.error("Answer id is undefined");
     const voteData: VoteRequest = {
-      questionId: answer.id,
+      questionId: response.id,
       vote: VOTES.DOWN,
     };
     await voteResponse(voteData);
