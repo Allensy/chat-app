@@ -2,6 +2,7 @@ import React, { FormEvent } from "react";
 import "./Dialog.scss";
 import Input from "../Input/input";
 import { UserData } from "../../types/Message.interface";
+import Button from "../Button/Button";
 interface DialogProps {
   onSave: (data: any) => void;
 }
@@ -34,18 +35,31 @@ const Dialog = ({ onSave }: DialogProps) => {
       <dialog open={true} className="chat-dialog">
         <form className="userForm" action="" onSubmit={saveData}>
           <div className="input-item">
-            <Input value={company_size} onChange={companySizeHandler}></Input>
+            <Input
+              value={company_size}
+              label="Company size"
+              onChange={companySizeHandler}
+            ></Input>
           </div>
           <div className="input-item">
-            <Input value={industry} onChange={industryHandler}></Input>
+            <Input
+              value={industry}
+              label="Industry"
+              onChange={industryHandler}
+            ></Input>
           </div>
           <div className="input-item">
-            <Input value={country} onChange={countryHandler}></Input>
+            <Input
+              value={country}
+              label="Country"
+              onChange={countryHandler}
+            ></Input>
           </div>
           {/* <input className="input-item" type="text" />
           <input className="input-item" type="text" />
           <input className="input-item" type="text" /> */}
-          <button>Save</button>
+          {/* <button className="submit_button">Save</button> */}
+          <Button>Save</Button>
         </form>
       </dialog>
     </div>

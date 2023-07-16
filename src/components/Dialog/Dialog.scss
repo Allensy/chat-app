@@ -1,9 +1,8 @@
 .dialog-backdrop {
-    background-color: #585858;
+    background-color: #58585885;
     width: 100vw;
     height: 100vh;
     position: absolute;
-    opacity: 0.6;
 
     .chat-dialog {
         transform: translate(-50%, -50%);
@@ -13,12 +12,34 @@
         width: 60vw;
 
         .userForm {
+            position: relative;
             display: flex;
             flex-direction: column;
+            justify-content: center;
             width: 50%;
+            height: 100%;
             margin: auto;
+
+            .submit_button {
+                background-color: #FFBC00;
+                transition: .2s background-color ease-in-out;
+                width: 77px;
+                height: 32px;
+                border: none;
+                border-radius: 4px;
+                position: absolute;
+                bottom: 20px;
+                right: 0;
+
+                &:hover {
+                    background-color: #FFDA7D;
+                }
+
+                cursor: pointer;
+            }
+
             .input-item {
-                
+                margin: 16px  0;
             }
         }
     }

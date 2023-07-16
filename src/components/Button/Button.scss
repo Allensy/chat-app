@@ -1,0 +1,23 @@
+ .Button {
+     background-color: #FFBC00;
+     transition: .2s background-color ease-in-out;
+     width: 77px;
+     height: 32px;
+     border: none;
+     border-radius: 4px;
+     position: absolute;
+     bottom: 20px;
+     right: 0;
+     cursor: pointer;
+
+     &.rounded {
+         border-radius: 50%;
+         height: 32px;
+         width: 32px;
+     }
+
+     &:hover {
+         background-color: #FFDA7D;
+     }
+
+ }

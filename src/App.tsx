@@ -4,16 +4,27 @@ import Input from "./components/Input/input";
 import Chat from "./components/Chat/chat";
 import { Answer, Message, Sender, UserData } from "./types/Message.interface";
 import { AI_STATE } from "./types/Message.interface";
-import { getQuestionsAndAnswers, initializeUser } from "./services/ai-service";
+import {
+  getQuestionsAndAnswers,
+  initializeUser,
+  getUserData,
+  resetUserData,
+} from "./services/ai-service";
 import Dialog from "./components/Dialog/Dialog";
+import Button from "./components/Button/Button";
 
 function App() {
   const [showModal, setShowModal] = React.useState<boolean>(false);
+
   useEffect(() => {
-    // if (!localStorage.getItem("userData")) setShowModal(true);
+    if (!getUserData()) setShowModal(true);
   }, []);
 
   const [messages, setMessages] = React.useState<(Message | Answer)[]>([]);
+
+  useEffect(() => {
+    if (!getUserData()) setShowModal(true);
+  }, [messages]);
 
   const inputHandler = (value: string) => {
     messages.push({ sender: Sender.USER, message: value });
@@ -48,13 +59,23 @@ function App() {
     );
   };
 
-  const getUserData = (data: UserData) => {
+  const setUserData = (data: UserData) => {
     setShowModal(false);
     initializeUser(data);
   };
+
+  const newChat = () => {
+    resetUserData();
+    setMessages([]);
+  };
   return (
     <div className="App">
-      {showModal && <Dialog onSave={getUserData} />}
+      <div className="new_button">
+        <Button onClick={newChat} rounded>
+          +
+        </Button>
+      </div>
+      {showModal && <Dialog onSave={setUserData} />}
       <div className="chat-section">
         <Chat messages={messages}></Chat>
       </div>

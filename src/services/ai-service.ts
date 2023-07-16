@@ -6,29 +6,6 @@ import {
   QUERY_ENDPOINT,
   QUESTION_ENDPOINT,
 } from "../constants/configs";
-// require("dotenv").config();
-
-// interface Embedding {
-//   question: string;
-//   companyName?: string;
-//   companySize?: number;
-//   companyIndustry?: string;
-//   companyCountry?: string;
-//   conversationDate?: number;
-//   model?: string;
-// }
-
-// export const askQuestion = async (query: string) => {
-//   const dataToSend: Embedding = {
-//     question: query,
-//   };
-
-//   const response = await axios.post(`${API_BASE_URL}${QUERY_ENDPOINT}`, {
-//     dataToSend,
-//   });
-
-//   return response.data;
-// };
 
 export interface VoteRequest {
   questionId: string;
@@ -45,11 +22,33 @@ export const initializeUser = (data: UserData) => {
   localStorage.setItem("userData", JSON.stringify(data));
 };
 
+export const getUserData = (): UserData | null => {
+  try {
+    let data = localStorage.getItem("userData");
+    return data ? JSON.parse(data) : null;
+  } catch (e) {
+    console.error(e);
+    return null;
+  }
+};
+
+export const resetUserData = () => {
+  localStorage.removeItem("userData");
+};
+
 export const getQuestionsAndAnswers = async (
   question: string
 ): Promise<Answer[]> => {
+  let params = "";
+  const userData: UserData | null = getUserData();
+  if (userData) {
+    const { company_size = null, industry = null, country = null } = userData;
+    if (company_size) params += `&company_size=${company_size}`;
+    if (industry) params += `&industry=${industry}`;
+    if (country) params += `&country=${country}`;
+  }
   const response = await axios.get(
-    `${BASE_URL}${QUESTION_ENDPOINT}${question}`
+    `${BASE_URL}${QUESTION_ENDPOINT}${question}${params}`
   );
   return response.data;
 };

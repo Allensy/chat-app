@@ -7,14 +7,15 @@ interface InputProps {
   onChange?: (e: any) => void;
   onEnter?: (e: any) => void;
   value?: string;
+  label?: string;
 }
 
-function Input({ onChange, onEnter, value = "" }: InputProps) {
+function Input({ onChange, onEnter, value = "", label }: InputProps) {
   const [inputValue, setInputValue] = React.useState<string>(value);
 
   const inputHandler = (e: any) => {
     setInputValue(e.target.value);
-    onChange && onChange(inputValue);
+    onChange && onChange(e.target.value);
   };
   const handleKeyDown = (e: { key: string }) => {
     if (e.key === ENTER_KEY) {
@@ -24,12 +25,15 @@ function Input({ onChange, onEnter, value = "" }: InputProps) {
   };
 
   return (
-    <input
-      value={inputValue}
-      className="Input"
-      onKeyDown={handleKeyDown}
-      onChange={inputHandler}
-    ></input>
+    <div className="Input_wrapper">
+      {label ? <label className="Input_label">{label}</label> : null}
+      <input
+        value={inputValue}
+        className="Input"
+        onKeyDown={handleKeyDown}
+        onChange={inputHandler}
+      ></input>
+    </div>
   );
 }
 
