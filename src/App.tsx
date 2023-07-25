@@ -51,7 +51,8 @@ function App() {
         const error: Answer = {
           sender: Sender.AI,
           error: true,
-          response: "Oops! Sowwyyyyy!",
+          response:
+            "A temporal requests limit, please try again in a few seconds",
         };
         messages.push(error);
         setMessages([...messages]);
